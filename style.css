@@ -1,0 +1,131 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(img/background.jpg);
+    background-size: cover;
+    background-position: top;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.memory-game {
+    width: 640px;
+    height: 640px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px;
+    color: #fff;
+    font-size: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.memory-card {
+    width: calc(33.3333% - 10px);
+    height: calc(30% - 10px);
+    margin: 5px;
+    position: relative;
+    transform: scale(1);
+    transition: all .5s;
+    transform-style: preserve-3d;
+}
+
+.memory-card:active {
+    transform: scale(.97);
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg);
+}
+
+.front-face,
+.back-face {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    position: absolute;
+    border-radius: 5px;
+    background-color: rgba(221, 221, 221, 0.7);
+    backface-visibility: hidden;
+}
+
+.back-face {
+    transform: rotateY(180deg);
+}
+
+
+
+/* BUTTON STYLES */
+button:active,
+button:focus {
+    outline: none;
+}
+
+.new-btn {
+    position: absolute;
+    height: 40px;
+    width: 90px;
+    font-size: 1rem;
+    border-radius: 3px;
+    top: 20px;
+    right: 20px;
+    background-color: #fff;
+}
+
+/* LEVEL STYLES */
+.level {
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    color: #fff;
+    font-size: 1.5rem;
+    display: block;
+}
+
+.btn-container {
+    padding: 1rem 0;
+}
+
+.btn-container input {
+    display: none;
+}
+
+.level-label {
+    cursor: pointer;
+    position: relative;
+    padding-left: .5rem;
+
+}
+
+.radio-btn {
+    font-size: 1.5rem;
+}
+
+.radio-btn i {
+    padding-right: .5rem;
+}
+
+.btn-container input[type="radio"]:checked+label .radio-btn,
+.btn-container input[type="radio"]:checked+label .level-label {
+    color: #fa8320;
+}
+
+/* MEDIA QUERIES */
+/* @media only screen and (max-width: 768px) {
+    .memory-game {
+        width: 1000%;
+        height: 60%;
+    }
+
+    .new-btn {
+        top: 40px;
+
+    }
+} */

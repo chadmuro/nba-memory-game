@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Memory Game</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
+        integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="level">
+        <p>Select Difficulty:</p>
+
+        <div class="btn-container">
+            <input type="radio" class="level-btn" id="easy" name="level" checked>
+            <label for="easy" class="level-label">
+                <span class="radio-btn"><i class="fas fa-basketball-ball"></i>Easy</span>
+            </label>
+        </div>
+        <div class="btn-container">
+            <input type="radio" class="level-btn" id="normal" name="level">
+            <label for="normal" class="level-label">
+                <span class="radio-btn"><i class="fas fa-basketball-ball"></i>Normal</span>
+            </label>
+        </div>
+        <div class="btn-container">
+            <input type="radio" class="level-btn" id="hard" name="level">
+            <label for="hard" class="level-label">
+                <span class="radio-btn"><i class="fas fa-basketball-ball"></i>Hard</span>
+            </label>
+        </div>
+    </div>
+
+
+    <button class="new-btn">New Game</button>
+
+    <section class="memory-game">
+        <div class="memory-card" data-framework="bulls">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/bulls.png" alt="bulls" class="back-face">
+        </div>
+        <div class="memory-card" data-framework="bulls">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/bulls.png" alt="bulls" class="back-face">
+        </div>
+
+        <div class="memory-card" data-framework="celtics">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/celtics.png" alt="celtics" class="back-face">
+        </div>
+        <div class="memory-card" data-framework="celtics">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/celtics.png" alt="celtics" class="back-face">
+        </div>
+
+        <div class="memory-card" data-framework="knicks">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/knicks.png" alt="knicks" class="back-face">
+        </div>
+        <div class="memory-card" data-framework="knicks">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/knicks.png" alt="knicks" class="back-face">
+        </div>
+
+        <!-- <div class="memory-card" data-framework="lakers">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/lakers.png" alt="lakers" class="back-face">
+        </div>
+        <div class="memory-card" data-framework="lakers">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/lakers.png" alt="lakers" class="back-face">
+        </div>
+
+        <div class="memory-card" data-framework="magic">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/magic.png" alt="magic" class="back-face">
+        </div>
+        <div class="memory-card" data-framework="magic">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/magic.png" alt="magic" class="back-face">
+        </div>
+
+        <div class="memory-card" data-framework="mavericks">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/mavericks.png" alt="mavericks" class="back-face">
+        </div>
+        <div class="memory-card" data-framework="mavericks">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/mavericks.png" alt="mavericks" class="back-face">
+        </div>
+
+        <div class="memory-card" data-framework="raptors">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/raptors.png" alt="raptors" class="back-face">
+        </div>
+        <div class="memory-card" data-framework="raptors">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/raptors.png" alt="raptors" class="back-face">
+        </div>
+
+        <div class="memory-card" data-framework="warriors">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/warriors.png" alt="warriors" class="back-face">
+        </div>
+        <div class="memory-card" data-framework="warriors">
+            <img src="img/nba.png" alt="NBA logo" class="front-face">
+            <img src="img/warriors.png" alt="warriors" class="back-face">
+        </div> -->
+
+    </section>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
