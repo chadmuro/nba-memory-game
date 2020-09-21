@@ -1,6 +1,9 @@
 const memoryBoard = document.querySelector('.memory-game');
+const card = document.querySelector('.memory-card');
 const newBtn = document.querySelector('.new-btn');
 const win = document.querySelector('.win-text');
+const settings = document.querySelector('.level-form');
+
 const easyBtn = document.getElementById('easy');
 const normalBtn = document.getElementById('normal');
 const hardBtn = document.getElementById('hard');
@@ -9,8 +12,34 @@ let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 let finalCount = 0;
+let totalCount = 0;
 
-const teams = ['bucks', 'bulls', 'celtics', 'kings', 'knicks', 'lakers', 'magic', 'mavericks', 'raptors', 'warriors'];
+const easy = ['lakers', 'mavericks', 'warriors'];
+const normal = ['knicks', 'lakers', 'magic', 'mavericks', 'raptors', 'warriors'];
+const hard = ['bucks', 'bulls', 'celtics', 'kings', 'knicks', 'lakers', 'magic', 'mavericks', 'raptors', 'warriors'];
+let refresh;
+
+// Set difficulty to value in local storage or normal
+let difficulty =  localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'normal';
+
+// Set difficulty select value
+settings.value = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'normal';
+
+let checked = settings.value;
+if (checked === 'easy') {
+    easyBtn.checked = true;
+    refresh = easy;
+} else if (checked === 'hard') {
+    hardBtn.checked = true;
+    refresh = hard;
+} else {
+    normalBtn.checked = true;
+    refresh = normal;
+}
+
+// Initialize new game
+newGame(refresh);
+
 
 //GAME FUNCTIONALITY
 function flipCard() {
@@ -67,11 +96,11 @@ function resetBoard() {
 function checkWin() {
     finalCount += 1;
 
-    if (finalCount === teams.length) {
+    if (finalCount === totalCount) {
         win.innerHTML = `
             <h1>Congratulations! You win!</h1>
             <p>Your final score is 100</p>
-            <button onclick="newGame()">New Game?</button>
+            <button onclick="newGame(${difficulty})">New Game?</button>
         `;
 
         win.style.display = 'flex';
@@ -79,9 +108,9 @@ function checkWin() {
 }
 
 //NEW GAME FUNCTIONALITY
-function newGame() {
+function newGame(level) {
     memoryBoard.innerHTML = '';
-    teams.forEach(team => {
+    level.forEach(team => {
         let randomPos = Math.floor(Math.random() * 20);
         let randomPos2 = Math.floor(Math.random() * 20);
 		
@@ -110,6 +139,15 @@ function newGame() {
 
     win.style.display = 'none';
     finalCount = 0;
+    
+    if (level === easy) {
+            totalCount = 3;
+		} else if (level === hard) {
+			totalCount = 10;
+		} else {
+			totalCount = 6;
+		}
+
     resetBoard();
 
     for(let i = 0; i < memoryBoard.children.length; i++) {
@@ -121,7 +159,6 @@ function newGame() {
 
 
 
-
 //SHUFFLE BOARD IIFE
 // (function shuffle() {
 //     cards.forEach(card => {
@@ -130,6 +167,21 @@ function newGame() {
 //     });
 // })();
 
-//EVENT LISTENERS
-newBtn.addEventListener('click', newGame);
 
+//EVENT LISTENERS
+newBtn.addEventListener('click', function(){
+    console.log('clicked');
+});
+
+settings.addEventListener('change', e => {
+    difficulty = e.target.value;
+    localStorage.setItem('difficulty', difficulty);
+
+    if(difficulty === 'easy') {
+        newGame(easy);
+    } else if(difficulty === 'hard') {
+        newGame(hard);
+    } else {
+        newGame(normal);
+    }
+});
