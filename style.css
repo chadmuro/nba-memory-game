@@ -15,8 +15,8 @@ body {
 }
 
 .memory-game {
-    width: 640px;
-    height: 640px;
+    width: 800px;
+    height: 800px;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
@@ -25,11 +25,12 @@ body {
     font-size: 3rem;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .memory-card {
-    width: calc(33.3333% - 10px);
-    height: calc(30% - 10px);
+    width: calc(20% - 10px);
+    height: calc(20% - 10px);
     margin: 5px;
     position: relative;
     transform: scale(1);
@@ -77,6 +78,7 @@ button:focus {
     top: 20px;
     right: 20px;
     background-color: #fff;
+    cursor: pointer;
 }
 
 /* LEVEL STYLES */
@@ -115,6 +117,24 @@ button:focus {
 .btn-container input[type="radio"]:checked+label .radio-btn,
 .btn-container input[type="radio"]:checked+label .level-label {
     color: #fa8320;
+}
+
+
+
+.win-text {
+    background-color: rgba(0,0,0,0.7);
+    display: none;
+    text-align: center;
+    z-index: 10;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 /* MEDIA QUERIES */
