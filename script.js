@@ -100,6 +100,7 @@ function checkWin() {
         win.innerHTML = `
             <h1>Congratulations! You win!</h1>
             <p>Your final score is 100</p>
+            <br>
             <button onclick="newGame(${difficulty})">New Game?</button>
         `;
 
@@ -141,11 +142,18 @@ function newGame(level) {
     finalCount = 0;
     
     if (level === easy) {
-            totalCount = 3;
+            totalCount = easy.length;
+            memoryBoard.style.gridTemplateRows = 'repeat(2, minmax(50px, 200px))';
+            memoryBoard.style.gridTemplateColumns = 'repeat(3, minmax(50px, 200px))';
+
 		} else if (level === hard) {
-			totalCount = 10;
+            totalCount = hard.length;
+            memoryBoard.style.gridTemplateRows = 'repeat(4, minmax(50px, 200px))';
+            memoryBoard.style.gridTemplateColumns = 'repeat(5, minmax(50px, 200px))';
 		} else {
-			totalCount = 6;
+            totalCount = normal.length;
+            memoryBoard.style.gridTemplateRows = 'repeat(3, minmax(50px, 200px))';
+            memoryBoard.style.gridTemplateColumns = 'repeat(4, minmax(50px, 200px))';
 		}
 
     resetBoard();
@@ -170,7 +178,13 @@ function newGame(level) {
 
 //EVENT LISTENERS
 newBtn.addEventListener('click', function(){
-    console.log('clicked');
+    if (difficulty === 'easy') {
+        newGame(easy);
+    } else if (difficulty === 'hard') {
+        newGame(hard);
+    } else {
+        newGame(normal);
+    }
 });
 
 settings.addEventListener('change', e => {
