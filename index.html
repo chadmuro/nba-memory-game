@@ -10,33 +10,43 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button class="settings-btn">
+        <i class="fas fa-sliders-h"></i>
+    </button>
 
-    <div class="level">
-        <p>Select Difficulty:</p>
-        <form class="level-form">
-            <div class="btn-container">
-                <input type="radio" class="level-btn" id="easy" name="level" value="easy">
-                <label for="easy" class="level-label">
-                    <span class="radio-btn"><i class="fas fa-basketball-ball"></i>Easy</span>
-                </label>
+    <div class="settings">
+        <div class="settings-top">
+            <div class="time">
+                TIME:
+                <span class="time-number">0s</span>
             </div>
-            <div class="btn-container">
-                <input type="radio" class="level-btn" id="normal" name="level" value="normal" checked>
-                <label for="normal" class="level-label">
-                    <span class="radio-btn"><i class="fas fa-basketball-ball"></i>Normal</span>
-                </label>
-            </div>
-            <div class="btn-container">
-                <input type="radio" class="level-btn" id="hard" name="level" value="hard">
-                <label for="hard" class="level-label">
-                    <span class="radio-btn"><i class="fas fa-basketball-ball"></i>Hard</span>
-                </label>
-            </div>
-        </form>
+            <button class="new-btn">Restart</button>
+        </div>
+
+        <div class="level">
+            <p>Select Difficulty:</p>
+            <form class="level-form">
+                <div class="btn-container">
+                    <input type="radio" class="level-btn" id="easy" name="level" value="easy">
+                    <label for="easy" class="level-label">
+                        <span class="radio-btn"><i class="fas fa-basketball-ball"></i>Easy</span>
+                    </label>
+                </div>
+                <div class="btn-container">
+                    <input type="radio" class="level-btn" id="medium" name="level" value="medium" checked>
+                    <label for="medium" class="level-label">
+                        <span class="radio-btn"><i class="fas fa-basketball-ball"></i>Medium</span>
+                    </label>
+                </div>
+                <div class="btn-container">
+                    <input type="radio" class="level-btn" id="hard" name="level" value="hard">
+                    <label for="hard" class="level-label">
+                        <span class="radio-btn"><i class="fas fa-basketball-ball"></i>Hard</span>
+                    </label>
+                </div>
+            </form>
+        </div>
     </div>
-
-
-    <button class="new-btn">Reset</button>
 
     <section class="memory-game">
         <!-- <div class="memory-card" data-framework="bulls">
@@ -46,9 +56,7 @@
         <div class="memory-card" data-framework="bulls">
             <img src="img/nba.png" alt="NBA logo" class="front-face">
             <img src="img/bulls.png" alt="bulls" class="back-face">
-        </div> -->
-
-        
+        </div> --> 
     </section>
     <div class="win-text"></div>
 
