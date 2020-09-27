@@ -2,10 +2,13 @@ const memoryBoard = document.querySelector('.memory-game');
 const card = document.querySelector('.memory-card');
 const newBtn = document.querySelector('.new-btn');
 const win = document.querySelector('.win-text');
-const settings = document.querySelector('.level-form');
+const level = document.querySelector('.level-form');
+const settingsBtn = document.querySelector('.settings-btn');
+const settings = document.querySelector('.settings');
+const timeCount = document.querySelector('.time-number')
 
 const easyBtn = document.getElementById('easy');
-const normalBtn = document.getElementById('normal');
+const mediumBtn = document.getElementById('medium');
 const hardBtn = document.getElementById('hard');
 
 let hasFlippedCard = false;
@@ -13,19 +16,21 @@ let lockBoard = false;
 let firstCard, secondCard;
 let finalCount = 0;
 let totalCount = 0;
+let time = 0;
+let timeInterval;
 
 const easy = ['lakers', 'mavericks', 'warriors'];
-const normal = ['knicks', 'lakers', 'magic', 'mavericks', 'raptors', 'warriors'];
+const medium = ['knicks', 'lakers', 'magic', 'mavericks', 'raptors', 'warriors'];
 const hard = ['bucks', 'bulls', 'celtics', 'kings', 'knicks', 'lakers', 'magic', 'mavericks', 'raptors', 'warriors'];
 let refresh;
 
 // Set difficulty to value in local storage or normal
-let difficulty =  localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'normal';
+let difficulty =  localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'medium';
 
 // Set difficulty select value
-settings.value = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'normal';
+level.value = localStorage.getItem('difficulty') !== null ? localStorage.getItem('difficulty') : 'medium';
 
-let checked = settings.value;
+let checked = level.value;
 if (checked === 'easy') {
     easyBtn.checked = true;
     refresh = easy;
@@ -33,9 +38,10 @@ if (checked === 'easy') {
     hardBtn.checked = true;
     refresh = hard;
 } else {
-    normalBtn.checked = true;
-    refresh = normal;
+    mediumBtn.checked = true;
+    refresh = medium;
 }
+
 
 // Initialize new game
 newGame(refresh);
@@ -66,7 +72,6 @@ function checkForMatch() {
     let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
 
     isMatch ? disableCards() : unflipCards();
-
 }
 
 function disableCards() {
@@ -95,18 +100,18 @@ function resetBoard() {
 
 function checkWin() {
     finalCount += 1;
-
-    if (finalCount === totalCount) {
+    if (finalCount === totalCount) {   
         win.innerHTML = `
             <h1>Congratulations! You win!</h1>
-            <p>Your final score is 100</p>
+            <p>Your final time is ${time} seconds</p>
             <br>
             <button onclick="newGame(${difficulty})">New Game?</button>
         `;
-
         win.style.display = 'flex';
+        stopTime();
     }
 }
+
 
 //NEW GAME FUNCTIONALITY
 function newGame(level) {
@@ -140,7 +145,9 @@ function newGame(level) {
 
     win.style.display = 'none';
     finalCount = 0;
-    
+    time = 0;
+    resetBoard();
+
     if (level === easy) {
             totalCount = easy.length;
             memoryBoard.style.gridTemplateRows = 'repeat(2, minmax(50px, 200px))';
@@ -151,29 +158,34 @@ function newGame(level) {
             memoryBoard.style.gridTemplateRows = 'repeat(4, minmax(50px, 200px))';
             memoryBoard.style.gridTemplateColumns = 'repeat(5, minmax(50px, 200px))';
 		} else {
-            totalCount = normal.length;
+            totalCount = medium.length;
             memoryBoard.style.gridTemplateRows = 'repeat(3, minmax(50px, 200px))';
             memoryBoard.style.gridTemplateColumns = 'repeat(4, minmax(50px, 200px))';
 		}
-
-    resetBoard();
 
     for(let i = 0; i < memoryBoard.children.length; i++) {
         memoryBoard.children[i].addEventListener('click', flipCard);
         memoryBoard.children[i].classList.remove('flip');
     }
-
+    
+    stopTime();
+    timeFunction();
 }
 
 
+// TIME FUNCTIONALITY
+function timeFunction() {
+    timeInterval = setInterval(updateTime, 1000);
 
-//SHUFFLE BOARD IIFE
-// (function shuffle() {
-//     cards.forEach(card => {
-//         let randomPos = Math.floor(Math.random() * 16);
-//         card.style.order = randomPos;
-//     });
-// })();
+    function updateTime() {
+        time++;
+        timeCount.innerHTML = time + 's';
+    }
+}
+
+function stopTime() {
+    timeInterval = clearInterval(timeInterval);
+}
 
 
 //EVENT LISTENERS
@@ -183,11 +195,11 @@ newBtn.addEventListener('click', function(){
     } else if (difficulty === 'hard') {
         newGame(hard);
     } else {
-        newGame(normal);
+        newGame(medium);
     }
 });
 
-settings.addEventListener('change', e => {
+level.addEventListener('change', e => {
     difficulty = e.target.value;
     localStorage.setItem('difficulty', difficulty);
 
@@ -196,6 +208,12 @@ settings.addEventListener('change', e => {
     } else if(difficulty === 'hard') {
         newGame(hard);
     } else {
-        newGame(normal);
+        newGame(medium);
     }
+});
+
+// Settings button click
+settingsBtn.addEventListener('click', () => {
+    settings.classList.toggle('hide');
+    memoryBoard.classList.toggle('hide');
 });

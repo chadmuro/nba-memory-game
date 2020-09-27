@@ -15,11 +15,12 @@ body {
 }
 
 .memory-game {
-    width: 700px;
     min-width: 500px;
     height: 95%;
     min-height: 500px;
-    margin: auto;
+    flex-basis: 80%;
+    justify-content: center;
+    align-content: center;
     display: grid;
     grid-template-rows: repeat(4, minmax(50px, 200px));
     grid-template-columns: repeat(5, minmax(50px, 200px));
@@ -27,10 +28,13 @@ body {
     perspective: 1000px;
     color: #fff;
     font-size: 3rem;
-    align-content: center;
-    justify-content: center;
     position: relative;
     padding: 20px 0;
+    transition: transform .3s ease;
+}
+
+.memory-game.hide {
+    transform: translateX(-1%);
 }
 
 .memory-card {
@@ -66,7 +70,6 @@ body {
 }
 
 
-
 /* BUTTON STYLES */
 button {
     padding: 5px 10px;
@@ -80,23 +83,56 @@ button:focus {
     outline: none;
 }
 
-.new-btn {
+
+/* SETTINGS STYLES */
+.settings {
+    height: 100%;
+    flex-grow: 0;
+    padding: 20px 20px 0 20px;
+    background-color: rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(0);
+    transition: all .3s ease;
+}
+
+.settings.hide {
+    transform: translateX(-100%);
+    flex: 0;
+}
+
+.settings-btn {
     position: absolute;
+    bottom: 30px;
+    left: 30px;
+    z-index: 10;
+}
+
+.new-btn {
     height: 40px;
     width: 120px;
-    top: 20px;
-    right: 20px;
     background-color: #fff;
+    text-transform: uppercase;
 }
+
+.time {
+    margin-bottom: 30px;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.time-number {
+    font-size: 2rem;
+}
+
 
 /* LEVEL STYLES */
 .level {
-    position: absolute;
-    top: 40px;
-    left: 30px;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     display: block;
+    padding-top: 100px;
+    text-transform: uppercase;
 }
 
 .btn-container {
@@ -111,11 +147,6 @@ button:focus {
     cursor: pointer;
     position: relative;
     padding-left: .5rem;
-
-}
-
-.radio-btn {
-    font-size: 1.5rem;
 }
 
 .radio-btn i {
@@ -127,7 +158,7 @@ button:focus {
 }
 
 
-
+/* WIN TEXT STYLE */
 .win-text {
     background-color: rgba(0,0,0,0.7);
     display: none;
@@ -145,15 +176,39 @@ button:focus {
     padding: 20px;
 }
 
+
 /* MEDIA QUERIES */
-/* @media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
+    .settings {
+        flex-basis: 10%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
     .memory-game {
-        width: 1000%;
-        height: 60%;
+        flex-basis: 100%;
     }
 
-    .new-btn {
-        top: 40px;
-
+    .settings {
+        transform: translateX(-100%);
+        flex: 0;
+        display: none;
     }
-} */
+
+    .settings.hide {
+        transform: translateX(0);
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .body {
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .memory-game {
+        width: 450px;
+        height: 450px;
+    }
+}
